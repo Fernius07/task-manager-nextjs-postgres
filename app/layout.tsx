@@ -4,6 +4,7 @@ import './globals.css';
 import { Navbar } from '@/components/Navbar';
 import { getCurrentUser } from '@/lib/auth';
 import { Toaster } from 'react-hot-toast';
+import { Analytics } from '@vercel/analytics/next';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,6 +28,7 @@ export default async function RootLayout({
           {children}
         </main>
         <Toaster position="bottom-right" />
+        <Analytics />
       </body>
     </html>
   );
