@@ -1,68 +1,63 @@
-# Task Manager Next.js
+# Professional Task Manager | Full-Stack Next.js 14
 
-A professional full-stack Task Manager application built with Next.js 14, TypeScript, Prisma, and PostgreSQL. Designed for easy deployment on Vercel with Vercel Postgres.
+Este proyecto es un gestor de tareas profesional diseñado con un enfoque en la experiencia de usuario (UX) y una arquitectura técnica sólida. Representa una solución completa que integra autenticación segura, operaciones CRUD en tiempo real y una interfaz moderna optimizada para desarrolladores.
 
-## Technologies Used
+## 🚀 Características Principales
 
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Database**: PostgreSQL (via Prisma ORM)
-- **Styling**: Tailwind CSS
-- **Authentication**: Custom JWT (JOSE) + bcryptjs
-- **Deployment**: Vercel
+- **Dashboard Privado**: Gestión de tareas con estados dinámicos (Pendiente, En Progreso, Completado).
+- **Autenticación Segura**: Sistema de registro y login implementado con JWT (JSON Web Tokens) gestionados mediante cookies `httpOnly`, garantizando seguridad frente a ataques XSS.
+- **Arquitectura Full-Stack**: Construido íntegramente con el **App Router de Next.js 14**, aprovechando Server Components para un rendimiento óptimo.
+- **Persistencia de Datos**: Integración con **PostgreSQL** a través de **Prisma ORM**, con un diseño de esquema relacional eficiente entre usuarios y tareas.
+- **Diseño Moderno**: Interfaz responsive con modo oscuro profundo, utilizando Tailwind CSS para una estética limpia y profesional.
 
-## Local Setup
+## 🛠️ Stack Tecnológico
 
-1. **Clone the repository:**
-   ```bash
-   git clone <repo-url>
-   cd task-manager-nextjs-postgres
-   ```
+- **Frontend**: React 18, Next.js 14, Tailwind CSS.
+- **Backend**: Route Handlers (API) de Next.js, Middleware para protección de rutas.
+- **Base de Datos**: PostgreSQL.
+- **ORM**: Prisma.
+- **Seguridad**: JWT (jose), Bcryptjs para el hashing de contraseñas.
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+---
 
-3. **Configure Environment:**
-   Create a `.env` file in the root directory (if not exists) and add your database URL and JWT secret:
-   ```env
-   DATABASE_URL="postgresql://user:password@localhost:5432/taskmanager?schema=public"
-   JWT_SECRET="your-secret-key"
-   ```
-   > Note: You need a running PostgreSQL instance locally.
+## 🏗️ Cómo ejecutar este proyecto localmente
 
-4. **Initialize Database:**
-   ```bash
-   npx prisma generate
-   npx prisma migrate dev --name init
-   ```
+Para probar esta aplicación en tu entorno local, sigue estos pasos:
 
-5. **Run Development Server:**
-   ```bash
-   npm run dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
+### 1. Clonar y preparar dependencias
+```bash
+git clone https://github.com/Fernius07/task-manager-nextjs-postgres.git
+cd task-manager-nextjs-postgres
+npm install
+```
 
-## Deployment to Vercel
+### 2. Configuración de entorno
+Crea un archivo `.env` en la raíz del proyecto y define las siguientes variables:
+```env
+DATABASE_URL="tu_url_de_postgresql"
+JWT_SECRET="una_clave_secreta_para_tus_tokens"
+```
 
-1. **Push to GitHub.**
-2. **Import Project in Vercel:**
-   - Select your repository.
-   - Framework Preset: Next.js.
-3. **Configure Storage (Vercel Postgres):**
-   - Adding a Vercel Postgres store during import or in Storage tab.
-   - This automatically sets `POSTGRES_PRISMA_URL` and others.
-   - **Important**: Override `DATABASE_URL` in Vercel Environment Variables to use `POSTGRES_PRISMA_URL` or ensure your `schema.prisma` uses the correct env var if you switch to `POSTGRES_PRISMA_URL`. By default, this project uses `DATABASE_URL`.
-   - Add `JWT_SECRET` to Environment Variables.
-4. **Deploy.**
-   - Vercel will build and deploy the application.
-   - Connect your production database using Prisma (Vercel usually handles this if integrated).
+### 3. Preparar la Base de Datos
+Genera el cliente de Prisma y sincroniza el esquema con tu base de datos:
+```bash
+npx prisma generate
+npx prisma db push
+```
 
-## Scripts
+### 4. Lanzar la aplicación
+```bash
+npm run dev
+```
+La aplicación estará disponible en `http://localhost:3000`.
 
-- `npm run dev`: Start dev server.
-- `npm run build`: Build for production.
-- `npm run start`: Start production server.
-- `npm run lint`: Run ESLint.
-- `npx prisma studio`: Open database GUI.
+---
+
+## 🔍 Detalles Técnicos de Interés (Portfolio)
+
+- **Middleware Auth**: He implementado un middleware de Next.js que intercepta las peticiones a la ruta `/dashboard`, verificando el JWT antes de permitir el renderizado de la página, evitando destellos de contenido no autorizado.
+- **Separación de Capas**: El código mantiene una separación clara entre la lógica de negocio en la API y los componentes de UI, facilitando el mantenimiento y la escalabilidad.
+- **UX**: Gestión de estados de carga (skeletons/spinners) y notificaciones en tiempo real con `react-hot-toast` para un feedback inmediato al usuario.
+
+---
+*Desarrollado con enfoque en rendimiento y seguridad por **Iñigo Fernández García**.*
